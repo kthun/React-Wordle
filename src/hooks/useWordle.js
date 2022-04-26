@@ -9,7 +9,7 @@ const useWordle = (solution) => {
     const [isCorrect, setIsCorrect] = useState(false)
 
     const formatGuess = () => {
-
+        console.log('Submitted guess ', currentGuess)
     }
 
     const addNewGuess = () => {
@@ -17,6 +17,23 @@ const useWordle = (solution) => {
     }
 
     const handleKeyUp = ({ key }) => {
+
+        if (key === "Enter") {
+            if (turn > 5) {
+                console.log('No more guesses')
+                return
+            }
+            if (history.includes(currentGuess)) {
+                console.log('Already tried this word')
+                return
+            }
+            if (currentGuess.length !== 5) {
+                console.log('Word must be 5 letters long')
+                return
+            }
+            formatGuess()
+        }
+
         
         if (key === "Backspace") {
             if (currentGuess.length > 0) {
