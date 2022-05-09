@@ -9,7 +9,24 @@ const useWordle = (solution) => {
     const [isCorrect, setIsCorrect] = useState(false)
 
     const formatGuess = () => {
-        console.log('Submitted guess ', currentGuess)
+        console.log('Received and formatting guess: ', currentGuess)
+        let solutionArray = [...solution]
+        let formattedGuess = [...currentGuess].map((letter) => {
+            return {letter: letter, color: 'grey'}
+        })
+
+        formattedGuess.forEach((formattedLetter, i) => {
+            if (solutionArray[i] === formattedLetter.letter) {
+                formattedLetter.color = 'green'
+                solutionArray[i] = null
+            } else if (solutionArray.includes(formattedLetter.letter) && formattedLetter.color !== 'green') {
+                formattedLetter.color = 'yellow'
+                solutionArray[solutionArray.indexOf(formattedLetter.letter)] = null
+                
+            }
+        })
+
+        return formattedGuess
     }
 
     const addNewGuess = () => {
@@ -17,7 +34,6 @@ const useWordle = (solution) => {
     }
 
     const handleKeyUp = ({ key }) => {
-
         if (key === "Enter") {
             if (turn > 5) {
                 console.log('No more guesses')
@@ -31,10 +47,10 @@ const useWordle = (solution) => {
                 console.log('Word must be 5 letters long')
                 return
             }
-            formatGuess()
+            const formattedGuess = formatGuess()
+            console.log(formattedGuess)
         }
 
-        
         if (key === "Backspace") {
             if (currentGuess.length > 0) {
                 setCurrentGuess((prev) => {
@@ -43,6 +59,7 @@ const useWordle = (solution) => {
                 return
             }
         }
+
         if (/^[A-Za-z]$/.test(key)) {
             if (currentGuess.length < 5) {
                 setCurrentGuess((prev) => {
