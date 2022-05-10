@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function Row({ guess, currentGuess }) {
   if (guess) {
-    console.log(guess)
     return (
       <div className="row">
         {guess.map((l, i) => (
