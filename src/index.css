@@ -58,12 +58,10 @@ h1 {
 .row.current > div.filled {
   animation: bounce 0.2s ease-in-out forwards;
 }
-
 .keypad {
   max-width: 500px;
   margin: 20px auto;
 }
-
 .keypad > div {
   display: inline-block;
   width: 40px;
@@ -73,6 +71,22 @@ h1 {
   border-radius: 6px;
   line-height: 50px;
 }
+.keypad > div.green {
+  background: #5ac85a;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.yellow {
+  background: #e2cc68;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.keypad > div.grey {
+  background: #a1a1a1;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+
 
 /* animations */
 @keyframes flip {
